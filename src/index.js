@@ -1,22 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-<<<<<<< HEAD
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import injectTapEventPlugin from "react-tap-event-plugin";
 
-ReactDOM.render(<App />, document.getElementById('root'));
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
-=======
-import App from './App';
-import './index.css';
+import App from "./App";
+import Summary from "./components/summary/Summary";
+import Menu from "./components/menus/SpicyMenu";
+import AddMenu from "./components/menus/AddMenu";
+import MenuDetail from "./components/menus/MenuDetail";
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
+import {BrowserRouter as Router, browserHistory, Route, Redirect} from "react-router-dom";
+
+injectTapEventPlugin();
+
+
+const Root = () => (
+    <MuiThemeProvider>
+        <Router history={browserHistory}>
+            <div>
+                <Route path="/" component={App}/>
+                <Route path="/menu" component={Menu}/>
+                <Route path="/summary" component={Summary}/>
+                <Route path="/addMenu" component={AddMenu}/>
+                <Route path="/menuDetail/:id" component={MenuDetail}/>
+                <Redirect from="/" to="/menu"/>
+            </div>
+        </Router>
+    </MuiThemeProvider>
 );
->>>>>>> Intial commit for Spicy Veggie
+
+
+ReactDOM.render(<Root />, document.getElementById('root'));
